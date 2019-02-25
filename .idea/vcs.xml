@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/ApiTestcase/Apitest" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Apitest" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Apitest/apitest1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/接口框架" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/接口框架/sweetest" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/接口框架/sweetest/sweettest-" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/接口自动化/Apitest" vcs="Git" />
+  </component>
+</project>
