@@ -33,25 +33,25 @@ class Test_api(unittest.TestCase):
     @ddt.data(*testdata)
     def test_api(self, data):
         # try:
-            # 调用发送方法，传递参数
-            res = base_api.send_requests(self.s, data)
-            #调用写入方法
-            base_api.wirte_result(res, filename=reportxlsx)
-            # 读取文件中的期望结果
-            check = data["checkpoint"]
-            print("期望结果->：%s"%check)
-            # 接口返回的结果
-            res_text = res["text"]
-            print("实际结果->：%s"%res_text)
+        # 调用发送方法，传递参数
+        res = base_api.send_requests(self.s, data)
+        #调用写入方法
+        base_api.wirte_result(res, filename=reportxlsx)
+        # 读取文件中的期望结果
+        check = data["checkpoint"]
+        print(f"期望结果->：{check}")
+        # 接口返回的结果
+        res_text = res["text"]
+        print(f"实际结果->：{res_text}")
 
-            # mylog.info("期望结果->：%s"%check)
-            #
-            # mylog.info("实际结果->：%s"%res_text)
-            # #断言
-            # mylog.info("检查点->：%s,返回实际结果->:%s" % (check,res_text))
-            #断言，是否存在
+        # mylog.info("期望结果->：%s"%check)
+        #
+        # mylog.info("实际结果->：%s"%res_text)
+        # #断言
+        # mylog.info("检查点->：%s,返回实际结果->:%s" % (check,res_text))
+        #断言，是否存在
 
-            self.assertIn(check, res_text, '测试失败')
+        self.assertIn(check, res_text, '测试失败')
 if __name__ == "__main__":
     unittest.main()
 

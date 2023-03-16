@@ -21,27 +21,23 @@ def send_requests(s,testdata):
         params = None
     try:
         headers = eval(testdata["headers"])
-        print("请求头部%s" % headers)
+        print(f"请求头部{headers}")
     except:
         headers = None
     type = testdata["type"]
-    print("*********正在执行用例*********%s*******************" % test_nub)
+    print(f"*********正在执行用例*********{test_nub}*******************")
     # mylog.info("  ")
     # mylog.info("*********正在执行用例*********%s*******************" % test_nub)
-    print("请求方式：%s,请求url：%s" %(method,url))
-    print("get请求参数：%s" % params)
+    print(f"请求方式：{method},请求url：{url}")
+    print(f"get请求参数：{params}")
     try:
         bodydata = eval(testdata["body"])
     except:
         bodydata = {}
-    if type =="data":
-        body = bodydata
-    elif type == "json":
-        body = json.dumps(bodydata)
-    else:
-        body = bodydata
+    body = json.dumps(bodydata) if type == "json" else bodydata
     #请求方式，如果为post，输入body内容
-    if method == "post":print("post请求body类型为：%s，body内容为：%s" % (type,body))
+    if method == "post":
+        print(f"post请求body类型为：{type}，body内容为：{body}")
     verify = False
     res ={}
     try:
@@ -71,24 +67,12 @@ def send_requests(s,testdata):
         #把接口返回的响应时间添加到字典res
         res["times"] = str(r.elapsed.total_seconds())
         #如果请求状态码不等于200，就把报错内容写入到error里
-        if res['statuscode']!= "200":
-            res["error"] = res['text']
-        else:
-            #否则不写入
-            res["error"] = ""
+        res["error"] = res['text'] if res['statuscode']!= "200" else ""
         res["msg"] = ""
         #如果检查点在接口返回的信息中，则pass，并吧pass添加到excel对应的列中
-        if testdata["checkpoint"] in res["text"]:
-            res["result"] = "pass"
-            print("测试结果为：%s---->%s" % (test_nub,res["result"]))
-            # mylog.info("测试结果为：%s---->%s" % (test_nub,res["result"]))
-        else:
-            #如果检查点不在接口返回信息中，则把结果写为失败，添加到excel列中
-            res["result"] = "fail"
-            print("测试结果为：%s---->%s" % (test_nub, res["result"]))
-            # mylog.info("测试结果为：%s---->%s" % (test_nub, res["result"]))
+        res["result"] = "pass" if testdata["checkpoint"] in res["text"] else "fail"
+        print(f'测试结果为：{test_nub}---->{res["result"]}')
         return res
-    #如果异常，则跑出异常，吧结果写入excel列msg
     except  Exception as msg:
         res["msg"] = str(msg)
         # mylog.log(str(msg))
